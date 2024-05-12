@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block base %}
+    <main class="main-content">
+        <h2>{{login_type}} Login</h2>
+        <div>
+            {% if error %}
+                <h1>{{error}}</h1>
+            {% endif %}
+            <form id="login-form" method = "POST">
+                <div class="form-group">
+                <label for="user_id">User Id:</label>
+                <input type="text" name="user_id" id="user_id">
+                </div>
+                <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="text" name="password" id="password">
+                </div>
+                <button type="submit" >Login</button>
+            </form>
+        </div>
+
+
+    </main>
+
+{% endblock %}

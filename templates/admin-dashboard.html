@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block base %}
+
+
+<main class="table-content">
+    <h1 class="card">Registered Customer <span class="card_left"><a href="/customer_registration" method="POST"> New Customer Registration</a> </span></h1>
+    <table class="modern-table">
+    <thead>
+        <tr>
+            <th>Customer Name</th>
+            <th>Age</th>
+            <th>City</th>
+            <th>Gender</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Balance</th>
+            <th>Account Type</th>
+            <th>Username</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Omkar</td>
+            <td>22</td>
+            <td>pune</td>
+            <td>Male</td>
+            <td>ok@ts.com</td>
+            <td>Password</td>
+            <td>90000</td>
+            <td>Savings</td>
+            <td>omkarcodemore</td>
+        </tr>
+        <tr>
+            <td>Adam</td>
+            <td>22</td>
+            <td>New York</td>
+            <td>Male</td>
+            <td>ad@ts.com</td>
+            <td>Password@123</td>
+            <td>90000</td>
+            <td>Savings</td>
+            <td>adamcode</td>
+        </tr>
+        <!-- More rows can be added similarly -->
+    </tbody>
+</table>
+
+</main>
+{% endblock %}
