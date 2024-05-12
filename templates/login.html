@@ -3,9 +3,9 @@
     <main class="main-content">
         <h2>{{login_type}} Login</h2>
         <div>
-            {% if error %}
-                <h1>{{error}}</h1>
-            {% endif %}
+            {% for message in get_flashed_messages() %}
+                <h1>{{message}}</h1>
+            {% endfor %}
             <form id="login-form" method = "POST">
                 <div class="form-group">
                 <label for="user_id">User Id:</label>

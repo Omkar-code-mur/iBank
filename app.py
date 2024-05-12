@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 
 app = Flask(__name__)
-
+app.secret_key = "sldjfoirhtlnlsdjf;j"
 SYMBOLS = [
         '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
         ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
@@ -11,7 +11,7 @@ SYMBOLS = [
 def is_userid_valid(userid):
     if len(userid) >= 8 and userid.isalnum():
         return True
-    return True
+    return False
 
 
 def is_password_valid(password):
@@ -20,7 +20,7 @@ def is_password_valid(password):
             any(letter for letter in password if letter.isdigit()) and\
             any(letter for letter in password if letter.isupper()):
         return True
-    return True
+    return False
 
 
 @app.route("/")
@@ -32,9 +32,11 @@ def homepage():
 def admin_login():
     if request.method == "POST":
         if not is_userid_valid(request.form['user_id']):
-            return render_template("login.html", login_type="Admin ", error="Enter Valid user_id")
+            flash("Enter Valid user_id")
+            return render_template("login.html", login_type="Admin ")
         elif not is_password_valid(request.form['password']):
-            return render_template("login.html", login_type="Admin ", error="Enter Valid password")
+            flash("Enter Valid password")
+            return render_template("login.html", login_type="Admin ")
         return render_template("admin-dashboard.html")
     return render_template("login.html", login_type="Admin ")
 
