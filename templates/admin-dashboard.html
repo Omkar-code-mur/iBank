@@ -3,16 +3,16 @@
 
 
 <main class="table-content">
-    <h1 class="card">Registered Customer <span class="card_left"><a href="/customer_registration" method="POST"> New Customer Registration</a> </span></h1>
+    <h1 class="card">Registered Customer <span class="card_left"><a href="/admin-logged-in/customer_registration/" method="POST"> New Customer Registration</a> </span></h1>
     <table class="modern-table">
     <thead>
         <tr>
+            <th>Account Number</th>
             <th>Customer Name</th>
             <th>Age</th>
             <th>City</th>
             <th>Gender</th>
             <th>Email</th>
-            <th>Password</th>
             <th>Balance</th>
             <th>Account Type</th>
             <th>Username</th>
@@ -21,27 +21,32 @@
     </thead>
     <tbody>
         <tr>
+            <td>20240001</td>
             <td>Omkar</td>
             <td>22</td>
             <td>pune</td>
             <td>Male</td>
             <td>ok@ts.com</td>
-            <td>Password</td>
             <td>90000</td>
             <td>Savings</td>
             <td>omkarcodemore</td>
         </tr>
+
+        {% for row in table %}
         <tr>
-            <td>Adam</td>
-            <td>22</td>
-            <td>New York</td>
-            <td>Male</td>
-            <td>ad@ts.com</td>
-            <td>Password@123</td>
-            <td>90000</td>
-            <td>Savings</td>
-            <td>adamcode</td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[5]}}</td>
+            <td>{{row[7]}}</td>
+            <td>{{row[8]}}</td>
+            <td>{{row[9]}}</td>
+            <td>{{row[10]}}</td>
+
+
         </tr>
+        {% endfor %}
         <!-- More rows can be added similarly -->
     </tbody>
 </table>

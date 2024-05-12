@@ -2,7 +2,52 @@
 {% block base %}
 
 
-<main class="main-content">
-customer registration
+<main class = "main-content">
+    <h2>Customer Registration</h2>
+    <form class = "form-group" method="post">
+        <label for="first">First Name</label>
+        <input type="text" id="first" name="customer" required>
+        <label for="middle">Middle Name</label>
+        <input type="text" id="middle" name="customer" required>
+        <label for="last">Last Name</label>
+        <input type="text" id="last" name="customer" required>
+
+        <label for="age">Age:</label>
+        <input type="text" id="age" name="age" required>
+
+        <label for="city">City:</label>
+        <select id="city" name="city">
+            <option value="New York">New York</option>
+            <option value="San Francisco">San Francisco</option>
+            <option value="Chicago">Chicago</option>
+        </select>
+
+
+
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female" required>
+        <label for="female">Female</label>
+
+
+        <label for="email"><h3>Email:</h3></label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="balance">Balance:</label>
+        <input type="text" id="balance" name="balance" required>
+
+        <label for="account">Account Type:</label>
+        <input type="text" id="account" name="account" required>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <button type="submit">Register</button>
+    </form>
+
 </main>
 {% endblock %}

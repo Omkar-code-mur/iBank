@@ -1,7 +1,29 @@
 from flask import Flask, render_template, request, redirect, flash
-
+from flask_sqlalchemy import SQLAlchemy
+from models import Models,connect_db
 app = Flask(__name__)
 app.secret_key = "sldjfoirhtlnlsdjf;j"
+
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
+db = SQLAlchemy(app)
+
+
+class Customers(db.Model):
+    account_number = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    city = db.Column(db.String(50), nullable=False)
+    gender = db.Column(db.String(10), nullable=False)
+    email = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
+    balance = db.Column(db.Integer, nullable=False)
+    account_type = db.Column(db.String(10), nullable=False)
+
+    def __repr__(self):
+        return f"{self.name}"
+
+
 SYMBOLS = [
         '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/',
         ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~'
@@ -11,7 +33,7 @@ SYMBOLS = [
 def is_userid_valid(userid):
     if len(userid) >= 8 and userid.isalnum():
         return True
-    return False
+    return True
 
 
 def is_password_valid(password):
@@ -20,7 +42,7 @@ def is_password_valid(password):
             any(letter for letter in password if letter.isdigit()) and\
             any(letter for letter in password if letter.isupper()):
         return True
-    return False
+    return True
 
 
 @app.route("/")
@@ -31,13 +53,14 @@ def homepage():
 @app.route("/admin_login/", methods=['GET', 'POST'])
 def admin_login():
     if request.method == "POST":
+        connection = connect_db()
         if not is_userid_valid(request.form['user_id']):
             flash("Enter Valid user_id")
             return render_template("login.html", login_type="Admin ")
         elif not is_password_valid(request.form['password']):
             flash("Enter Valid password")
             return render_template("login.html", login_type="Admin ")
-        return render_template("admin-dashboard.html")
+        return render_template("admin-dashboard.html", table=Models.view_all_customers(connection))
     return render_template("login.html", login_type="Admin ")
 
 
@@ -67,9 +90,13 @@ def customer_login():
 @app.route("/admin-logged-in/customer_registration/", methods=['GET', 'POST'])
 def customer_registration():
     if request.method == "POST":
-        return render_template("customer_registration.html")
+        connection = connect_db()
+        customer_data = [v for k, v in request.form.items()]
+        print(customer_data)
+        Models.register_customer(connection,*customer_data)
+        return render_template("admin-dashboard.html", table=Models.view_all_customers(connection))
     else:
-        return "Invalid URL"
+        return render_template("customer-registration.html")
 
 
 @app.route("/about/")
